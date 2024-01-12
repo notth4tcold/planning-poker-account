@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage ('Initial') {
+        stage ('Build Image') {
             steps {
-                echo 'Iniciando a pipeline'
+                script {
+                    dockerapp = docker.build("alexeiaj/planning-poker-account", '-f ./Dockerfile ./')
+                }
             }
         }
     }
