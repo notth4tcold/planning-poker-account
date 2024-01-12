@@ -4,8 +4,10 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
-                withGradle {
-                    bat 'gradle clean build bootJar'
+                if (isUnix()) {
+                    sh './gradlew clean build bootJar'
+                } else {
+                    bat 'gradlew.bat clean build bootJar'
                 }
             }
         }
