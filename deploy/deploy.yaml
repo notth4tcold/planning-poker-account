@@ -1,0 +1,72 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: planning-poker-account
+  namespace: default
+  labels:
+    app: planning-poker-account
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: planning-poker-account
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: planning-poker-account
+    spec:
+      containers:
+        - name: planning-poker-account
+          image: alexeiaj/planning-poker-account:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          env:
+            - name: JAVA_OPTS
+              value: -Xmx64m -Xms64m
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: http
+            initialDelaySeconds: 40
+            timeoutSeconds: 1
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: http
+            initialDelaySeconds: 40
+            timeoutSeconds: 1
+            periodSeconds: 15
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: planning-poker-account
+  namespace: default
+spec:
+  selector:
+    app: planning-poker-account
+  ports:
+    - port: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: planning-poker-account
+  namespace: default
+spec:
+  defaultBackend:
+    service:
+      name: planning-poker-account
+      port:
+        number: 8080
+---
