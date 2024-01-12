@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
-                script {
-                    sh "./gradlew clean build bootJar"
+                withGradle {
+                    bat 'gradle clean build bootJar'
                 }
             }
         }
