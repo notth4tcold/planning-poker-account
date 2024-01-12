@@ -33,7 +33,7 @@ pipeline {
             }
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
-                    sh 'kubectl apply -f ./deploy/deploy.yaml'
+                    bat 'kubectl apply -f ./deploy/deploy.yaml'
                 }
             }
         }
