@@ -24,7 +24,7 @@ spec:
       containers:
         - name: planning-poker-account
           image: alexeiaj/planning-poker-account:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8080
