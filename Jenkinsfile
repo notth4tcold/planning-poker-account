@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
-                bat 'gradlew.bat clean build bootJar'
+                bat 'APP_ENCRYPTION_PASSWORD=mongopassword gradlew.bat clean build bootJar'
             }
         }
 

@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    username: "mongouser"
+    password: ENC(QyaU0zloRJ99e6H0OwjL2hFZluko5Db+)
+    host: mongo
+
+jasypt:
+  encryptor:
+    password: ${APP_ENCRYPTION_PASSWORD}
