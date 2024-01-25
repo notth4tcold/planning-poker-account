@@ -33,7 +33,7 @@ pipeline {
             }
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
-                    bat 'powershell -Command "(gc ./deploy/deploy.yaml) -replace '{{tag}}', '$tag_version' | Out-File -encoding ASCII ./deploy/deploy.yaml"'
+                    PowerShell("(gc ./deploy/deploy.yaml) -replace '{{tag}}', '$tag_version' | Out-File -encoding ASCII ./deploy/deploy.yaml")
                     bat 'kubectl apply -f ./deploy/deploy.yaml'
                 }
             }
