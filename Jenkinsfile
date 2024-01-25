@@ -4,10 +4,12 @@ pipeline {
     stages {
         stage ('Build') {
             environment {
-                app_encryption_password = credentials('app_encryption_password')
+                mongo_db_host = credentials('MONGO_DB_HOST')
+                mongo_db_user = credentials('MONGO_DB_USER')
+                mongo_db_password = credentials('MONGO_DB_PASSWORD')
             }
             steps {
-                bat 'set APP_ENCRYPTION_PASSWORD=$app_encryption_password gradlew.bat clean build bootJar'
+                bat 'set MONGO_DB_HOST=$mongo_db_host & set MONGO_DB_USER=$mongo_db_user & set MONGO_DB_PASSWORD=$mongo_db_password & gradlew.bat clean build bootJar'
             }
         }
 
@@ -36,12 +38,11 @@ pipeline {
         stage ('Deploy Kubernetes') {
             environment {
                 tag_version = "${env.BUILD_ID}"
-                app_encryption_password = credentials('app_encryption_password')
             }
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
                     powershell("(gc ./deploy/deploy.yaml) -replace '{{TAG}}', '$tag_version' | Out-File -encoding ASCII ./deploy/deploy.yaml")
-                    bat 'set APP_ENCRYPTION_PASSWORD=$app_encryption_password kubectl apply -f ./deploy/deploy.yaml'
+                    bat 'kubectl apply -f ./deploy/deploy.yaml'
                 }
             }
         }
