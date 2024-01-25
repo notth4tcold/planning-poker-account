@@ -32,6 +32,10 @@ noArg {
 	annotation("com.alexeiaj.planningpokeraccount.core.common.annotation.NoArgsConstructor")
 }
 
+tasks.getByName<Jar>("jar") {
+	enabled = false
+}
+
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs += "-Xjsr305=strict"
