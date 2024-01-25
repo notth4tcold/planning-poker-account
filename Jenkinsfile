@@ -41,8 +41,7 @@ pipeline {
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
                     powershell("(gc ./deploy/deploy.yaml) -replace '{{TAG}}', '$tag_version' | Out-File -encoding ASCII ./deploy/deploy.yaml")
-                    powershell("(gc ./deploy/deploy.yaml) -replace '{{APP_ENCRYPTION_PASSWORD}}', '$app_encryption_password' | Out-File -encoding ASCII ./deploy/deploy.yaml")
-                    bat 'kubectl apply -f ./deploy/deploy.yaml'
+                    bat 'set APP_ENCRYPTION_PASSWORD=$app_encryption_password kubectl apply -f ./deploy/deploy.yaml'
                 }
             }
         }

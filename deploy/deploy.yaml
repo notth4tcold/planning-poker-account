@@ -33,7 +33,7 @@ spec:
             - name: JAVA_OPTS
               value: -Xmx64m -Xms64m
             - name: APP_ENCRYPTION_PASSWORD
-              value: {{APP_ENCRYPTION_PASSWORD}}
+              value: $APP_ENCRYPTION_PASSWORD
           livenessProbe:
             httpGet:
               path: /actuator/health
