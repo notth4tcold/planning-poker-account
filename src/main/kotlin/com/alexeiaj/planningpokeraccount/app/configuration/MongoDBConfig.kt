@@ -8,5 +8,5 @@ import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration
 @Configuration
 class MongoDBConfig: AbstractMongoClientConfiguration() {
     override fun getDatabaseName() = "planning-poker-account"
-    override fun mongoClient() = MongoClients.create("mongodb://mongouser:mongopassword@172.19.0.2:27017/planning-poker-account?authSource=admin")
+    override fun mongoClient() = MongoClients.create("mongodb://mongouser:mongopassword@172.19.0.1:27017/planning-poker-account?authSource=admin")
 }
