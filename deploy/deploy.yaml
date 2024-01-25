@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: planning-poker-account
-          image: alexeiaj/planning-poker-account:{{tag}}
+          image: alexeiaj/planning-poker-account:{{TAG}}
           imagePullPolicy: Always
           ports:
             - name: http
@@ -32,6 +32,8 @@ spec:
           env:
             - name: JAVA_OPTS
               value: -Xmx64m -Xms64m
+            - name: APP_ENCRYPTION_PASSWORD
+              value: {{APP_ENCRYPTION_PASSWORD}}
           livenessProbe:
             httpGet:
               path: /actuator/health
