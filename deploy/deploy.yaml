@@ -41,18 +41,9 @@ spec:
           env:
             - name: JAVA_OPTS
               value: -Xmx64m -Xms64m
-            - name: MONGO_DB_HOST
-              configMapKeyRef:
+          envFrom:
+            - configMapRef:
                 name: planning-poker-account
-                key: MONGO_DB_HOST
-            - name: MONGO_DB_USER
-              configMapKeyRef:
-                name: planning-poker-account
-                key: MONGO_DB_USER
-            - name: MONGO_DB_PASSWORD
-              configMapKeyRef:
-                name: planning-poker-account
-                key: MONGO_DB_PASSWORD
           livenessProbe:
             httpGet:
               path: /actuator/health
