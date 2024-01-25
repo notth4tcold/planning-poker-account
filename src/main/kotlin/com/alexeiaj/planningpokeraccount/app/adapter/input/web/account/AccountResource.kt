@@ -27,6 +27,9 @@ class AccountResource (
         private val deleteAccountUseCase : IDeleteAccountUseCase,
 ) {
 
+    @GetMapping("/test")
+    fun test() = "test"
+
     @GetMapping
     fun findAll(): List<AccountResponse> =
             findAllAccountUseCase.findAll().map { it.toResponse() }
