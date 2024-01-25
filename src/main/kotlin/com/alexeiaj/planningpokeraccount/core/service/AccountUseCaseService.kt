@@ -26,13 +26,13 @@ class AccountUseCaseService(
 
     override fun findAll(): List<AccountDomain> = findAllAccountPort.findAll()
 
-    override fun findById(id: Long): AccountDomain = findByIdAccountPort.findById(id)
+    override fun findById(id: String): AccountDomain = findByIdAccountPort.findById(id)
             ?: throw AccountNotFoundException("ACCOUNT NOT FOUND")
 
     override fun create(account: AccountRequest): AccountDomain = createAccountPort.create(account)
 
-    override fun update(id: Long, account: AccountRequest): AccountDomain = updateAccountPort.update(id, account)
+    override fun update(id: String, account: AccountRequest): AccountDomain = updateAccountPort.update(id, account)
             ?: throw AccountNotFoundException("ACCOUNT NOT FOUND")
 
-    override fun delete(id: Long) = deleteAccountPort.delete(id)
+    override fun delete(id: String) = deleteAccountPort.delete(id)
 }

@@ -34,7 +34,7 @@ class AccountResource (
     @GetMapping("/{id}")
     fun findById(
             @PathVariable
-            id: Long,
+            id: String,
     ): AccountResponse = findByIdAccountUseCase.findById(id).toResponse()
 
     @PostMapping
@@ -46,7 +46,7 @@ class AccountResource (
     @PutMapping("/{id}")
     fun update(
             @PathVariable
-            id: Long,
+            id: String,
             @RequestBody
             account: AccountRequest,
     ): AccountResponse = updateAccountUseCase.update(id, account).toResponse()
@@ -54,6 +54,6 @@ class AccountResource (
     @DeleteMapping("/{id}")
     fun delete(
             @PathVariable
-            id: Long,
+            id: String,
     ) = deleteAccountUseCase.delete(id)
 }

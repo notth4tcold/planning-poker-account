@@ -4,5 +4,5 @@ import com.alexeiaj.planningpokeraccount.app.adapter.input.web.account.dto.Accou
 import com.alexeiaj.planningpokeraccount.core.domain.dto.AccountDomain
 
 interface UpdateAccountPort {
-    fun update(id: Long, account: AccountRequest): AccountDomain?
+    fun update(id: String, account: AccountRequest): AccountDomain?
 }

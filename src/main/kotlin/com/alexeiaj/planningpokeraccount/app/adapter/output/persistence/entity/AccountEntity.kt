@@ -1,22 +1,13 @@
 package com.alexeiaj.planningpokeraccount.app.adapter.output.persistence.entity
 
 import com.alexeiaj.planningpokeraccount.core.common.annotation.NoArgsConstructor
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType.IDENTITY
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
-@Entity
-@Table(name = "account")
+@Document("account")
 @NoArgsConstructor
 data class AccountEntity(
         @Id
-        @GeneratedValue(strategy = IDENTITY)
-        @Column(name = "id", nullable = false, updatable = false)
-        val id: Long? = null,
-
-        @Column(name = "accountId", nullable = true, updatable = true)
+        val id: String? = null,
         var accountId: String? = null,
 )

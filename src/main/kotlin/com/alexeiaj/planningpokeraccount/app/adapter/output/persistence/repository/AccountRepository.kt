@@ -1,6 +1,6 @@
 package com.alexeiaj.planningpokeraccount.app.adapter.output.persistence.repository
 
 import com.alexeiaj.planningpokeraccount.app.adapter.output.persistence.entity.AccountEntity
-import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.mongodb.repository.MongoRepository
 
-interface AccountRepository : JpaRepository<AccountEntity, Long>
+interface AccountRepository : MongoRepository<AccountEntity, String>
