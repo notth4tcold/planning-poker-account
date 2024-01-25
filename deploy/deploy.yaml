@@ -1,3 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: planning-poker-account
+  namespace: default
+data:
+  MONGO_DB_HOST: mongo
+  MONGO_DB_USER: mongouser
+  MONGO_DB_PASSWORD: mongopassword
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -72,13 +81,3 @@ spec:
       name: planning-poker-account
       port:
         number: 8080
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: planning-poker-account
-  namespace: default
-data:
-  MONGO_DB_HOST: mongo
-  MONGO_DB_USER: mongouser
-  MONGO_DB_PASSWORD: mongopassword
