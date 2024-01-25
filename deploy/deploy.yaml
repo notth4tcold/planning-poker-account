@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: planning-poker-account
-          image: alexeiaj/planning-poker-account:latest
+          image: alexeiaj/planning-poker-account:{{tag}}
           imagePullPolicy: Always
           ports:
             - name: http
