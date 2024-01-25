@@ -9,9 +9,9 @@ pipeline {
                 mongo_db_password = credentials('MONGO_DB_PASSWORD')
             }
             steps {
-                bat 'set MONGO_DB_HOST=$mongo_db_host'
-                bat 'set MONGO_DB_USER=$mongo_db_user'
-                bat 'set MONGO_DB_PASSWORD=$mongo_db_password'
+                bat 'set MONGO_DB_HOST=mongo'
+                bat 'set MONGO_DB_USER=mongouser'
+                bat 'set MONGO_DB_PASSWORD=mongopassword'
                 bat 'gradlew.bat clean build bootJar'
             }
         }
