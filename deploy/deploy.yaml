@@ -4,7 +4,7 @@ metadata:
   name: planning-poker-account
   namespace: default
 data:
-  MONGO_DB_HOST: mongo
+  MONGO_DB_HOST: localhost
   MONGO_DB_USER: mongouser
   MONGO_DB_PASSWORD: mongopassword
 ---
