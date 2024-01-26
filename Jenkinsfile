@@ -42,8 +42,8 @@ pipeline {
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
                     powershell("(gc ./deploy/deploy.yaml) -replace '{{TAG}}', '$tag_version' | Out-File -encoding ASCII ./deploy/deploy.yaml")
-                    bat 'kubectl apply -f ./deploy/ingress_deploy.yaml'
-                    bat 'kubectl apply -f ./deploy/mongo_db_deploy.yaml'
+//                     bat 'kubectl apply -f ./deploy/ingress_deploy.yaml'
+//                     bat 'kubectl apply -f ./deploy/mongo_db_deploy.yaml'
                     bat 'kubectl apply -f ./deploy/deploy.yaml'
                 }
             }
