@@ -15,6 +15,14 @@ nodes:
       - containerPort: 443
         hostPort: 443
         protocol: TCP
+      - containerPort: 27017
+        hostPort: 27017
+        protocol: TCP
+
+### CREATE KIND
+
+# kind create cluster --config=kind-config.yaml
+
 
 ### CREATE INGRESS
 
@@ -24,6 +32,7 @@ nodes:
 #  --for=condition=ready pod \
 #  --selector=app.kubernetes.io/component=controller \
 #  --timeout=90s
+
 
 ### CREATE MONGO DB
 
@@ -36,6 +45,7 @@ nodes:
 #  -e MONGO_INITDB_ROOT_PASSWORD=mongopassword
 #  -p 27017:27017
 #  -v mongo:/data/db mongo
+
 
 ### LINK NETWORK
 
