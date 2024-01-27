@@ -8,14 +8,13 @@ data:
   MONGO_INITDB_ROOT_PASSWORD: mongopassword
 ---
 apiVersion: apps/v1
-kind: Deployment
-#kind: StatefulSet
+kind: StatefulSet
 metadata:
   name: mongodb
   namespace: default
 spec:
-  #  serviceName: mongodb
-  #  replicas: 1
+  serviceName: mongodb
+  replicas: 1
   selector:
     matchLabels:
       app: mongodb
@@ -32,13 +31,13 @@ spec:
           envFrom:
             - configMapRef:
                 name: mongodb
-#          volumeMounts:
-#            - name: volume
-#              mountPath: /data/db
-#      volumes:
-#        - name: volume
-#          persistentVolumeClaim:
-#            claimName: mongodb-pvc
+          volumeMounts:
+            - name: volume
+              mountPath: /data/db
+      volumes:
+        - name: volume
+          persistentVolumeClaim:
+            claimName: mongodb-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -51,30 +50,29 @@ spec:
   ports:
     - port: 27017
       targetPort: 27017
-  type: ClusterIP
 ---
-#apiVersion: v1
-#kind: PersistentVolume
-#metadata:
-#  name: mongodb-pv
-#  namespace: default
-#spec:
-#  storageClassName: hostpath
-#  capacity:
-#    storage: 1Gi
-#  accessModes: [ "ReadWriteOnce" ]
-#  hostPath:
-#    path: "/Volumes/Data/data"
-#  persistentVolumeReclaimPolicy: Retain
-#---
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  name: mongodb-pvc
-#  namespace: default
-#spec:
-#  storageClassName: hostpath
-#  accessModes: [ "ReadWriteOnce" ]
-#  resources:
-#    requests:
-#      storage: 1Gi
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongodb-pv
+  namespace: default
+spec:
+  storageClassName: hostpath
+  capacity:
+    storage: 1Gi
+  accessModes: [ "ReadWriteOnce" ]
+  hostPath:
+    path: "/Volumes/Data/data"
+  persistentVolumeReclaimPolicy: Retain
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+  namespace: default
+spec:
+  storageClassName: hostpath
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: 1Gi
