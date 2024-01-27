@@ -41,7 +41,7 @@ pipeline {
             }
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
-                    powershell("(gc ./deploy/deploy.yaml) -replace ':latest', '$tag_version' | Out-File -encoding ASCII ./deploy/deploy.yaml")
+                    powershell("(gc ./deploy/deploy.yaml) -replace ':latest', ':$tag_version' | Out-File -encoding ASCII ./deploy/deploy.yaml")
                     bat 'kubectl apply -f ./deploy/deploy.yaml'
                 }
             }

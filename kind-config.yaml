@@ -15,16 +15,13 @@ nodes:
       - containerPort: 443
         hostPort: 443
         protocol: TCP
-      - containerPort: 27017
-        hostPort: 27017
-        protocol: TCP
 
 ### CREATE KIND
 # kind create cluster --config=kind-config.yaml
 
 ### CREATE INGRESS
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-# kubectl wait --namespace ingress-nginx \ --for=condition=ready pod \ --selector=app.kubernetes.io/component=controller \ --timeout=90s
+# kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
 
 ### CREATE MONGO DB
 # docker network create mongo
