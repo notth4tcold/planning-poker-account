@@ -15,22 +15,4 @@ nodes:
       - containerPort: 443
         hostPort: 443
         protocol: TCP
-
-### CREATE KIND
-# kind create cluster --config=kind-config.yaml
-
-### CREATE INGRESS
-# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-# kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=90s
-
-### CREATE MONGO DB
-# docker network create mongo
-# docker run -d --network mongo -h mongo --name mongo -e MONGO_INITDB_ROOT_USERNAME=mongouser -e MONGO_INITDB_ROOT_PASSWORD=mongopassword -p 27017:27017 -v mongo:/data/db mongo
-# OR
-# kubectl apply -f ./deploy/mongo_db_deploy.yaml
-
-### LINK NETWORK
-# docker network connect kind mongo
-
-### PORT FORWARD
-# kubectl port-forward mongo-pod-name 27017:27017
+        
