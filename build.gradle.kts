@@ -25,6 +25,20 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+
+	implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka:4.1.0")
+
+//	implementation("org.springframework.cloud:spring-cloud-starter")
+//	implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka:3.1.1")
+//	implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
+//	implementation("org.springframework.cloud:spring-cloud-starter-config")
+//	implementation("org.springframework.cloud:spring-cloud-stream")
+//	implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka")
+//	implementation("org.apache.kafka:kafka-streams")
+//	implementation("org.springframework.kafka:spring-kafka")
+//	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+//	implementation("io.micrometer:micrometer-tracing-bridge-brave")
+
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

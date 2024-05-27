@@ -13,6 +13,7 @@ import com.alexeiaj.planningpokeraccount.core.port.output.DeleteAccountPort
 import com.alexeiaj.planningpokeraccount.core.port.output.FindAllAccountPort
 import com.alexeiaj.planningpokeraccount.core.port.output.FindByIdAccountPort
 import com.alexeiaj.planningpokeraccount.core.port.output.UpdateAccountPort
+import com.alexeiaj.planningpokeraccount.core.port.output.stream.AccountCreatedProducerPort
 import org.springframework.stereotype.Service
 
 @Service
@@ -22,6 +23,7 @@ class AccountUseCaseService(
         private val findByIdAccountPort: FindByIdAccountPort,
         private val findAllAccountPort: FindAllAccountPort,
         private val deleteAccountPort: DeleteAccountPort,
+        private val accountCreatedProducerPort: AccountCreatedProducerPort,
 ) : ICreateAccountUseCase, IUpdateAccountUseCase, IFindByIdAccountUseCase, IFindAllAccountUseCase, IDeleteAccountUseCase {
 
     override fun findAll(): List<AccountDomain> = findAllAccountPort.findAll()
@@ -30,6 +32,7 @@ class AccountUseCaseService(
             ?: throw AccountNotFoundException("ACCOUNT NOT FOUND")
 
     override fun create(account: AccountRequest): AccountDomain = createAccountPort.create(account)
+            .apply { accountCreatedProducerPort.send(this) }
 
     override fun update(id: String, account: AccountRequest): AccountDomain = updateAccountPort.update(id, account)
             ?: throw AccountNotFoundException("ACCOUNT NOT FOUND")

@@ -3,3 +3,42 @@ spring:
     host: ${MONGO_DB_HOST}
     username: ${MONGO_DB_USER}
     password: ${MONGO_DB_PASSWORD}
+  jackson:
+    default-property-inclusion: non_null
+    serialization.write-dates-as-timestamps: false
+  kafka.consumer.properties.spring.json.trusted.packages: '*'
+  cloud:
+    function:
+      definition: account-created-stream
+    stream:
+      default:
+        producer:
+          use-native-encoding: true
+        consumer:
+          use-native-encoding: true
+      bindings:
+        account-created-stream-in-0:
+          destination: 'account-created-stream'
+          group: 'planning-poker-account'
+          content-type: 'application/json'
+          consumer:
+            concurrency: 1
+            max-attempts: 5
+        account-created-stream-out-0:
+          destination: 'account-created-stream'
+          content-type: 'application/json'
+      kafka:
+        bindings:
+          account-created-stream-in-0:
+            consumer:
+              auto-commit-offset: true
+              start-offset: 'latest'
+        binder:
+          brokers: 'localhost:9092'
+          auto-create-topics: true
+          producer-properties:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            value.serializer: org.springframework.kafka.support.serializer.JsonSerializer
+          consumer-properties:
+            key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value.deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
