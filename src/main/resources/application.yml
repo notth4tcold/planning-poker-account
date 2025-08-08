@@ -1,8 +1,11 @@
+server:
+  port: 9090
 spring:
-  datasource:
-    host: ${MONGO_DB_HOST}
-    username: ${MONGO_DB_USER}
-    password: ${MONGO_DB_PASSWORD}
+  data:
+    mongodb:
+      host: ${MONGO_DB_HOST}
+      username: ${MONGO_DB_USER}
+      password: ${MONGO_DB_PASSWORD}
   jackson:
     default-property-inclusion: non_null
     serialization.write-dates-as-timestamps: false
@@ -34,7 +37,7 @@ spring:
               auto-commit-offset: true
               start-offset: 'latest'
         binder:
-          brokers: 'localhost:9092'
+          brokers: ${KAFKA_BROKERS:kafka.default.svc.cluster.local:9092}
           auto-create-topics: true
           producer-properties:
             key.serializer: org.apache.kafka.common.serialization.StringSerializer

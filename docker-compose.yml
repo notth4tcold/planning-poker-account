@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3.8'
 services:
   mongo:
     image: mongo:latest
@@ -7,44 +7,45 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongouser
       MONGO_INITDB_ROOT_PASSWORD: mongopassword
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    ports:
-      - '2181:2181'
     networks:
-      - kafka-net
+      - dev-net
+
   kafka:
-    image: confluentinc/cp-kafka:latest
-    depends_on:
-      - zookeeper
+    image: confluentinc/cp-kafka:7.6.0
     ports:
       - '9092:9092'
+      - '9093:9093'
     environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_NODE_ID: '1'
+      CLUSTER_ID: 'vA86_xBqS2uw6XSJhehxBA'
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_LISTENERS: 'PLAINTEXT://:9092,CONTROLLER://:9093'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://localhost:9092'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka:9093'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: '1'
+    volumes:
+      - kafka-data:/var/lib/kafka/data
     networks:
-      - kafka-net
+      - dev-net
+
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
+    ports:
+      - '8081:8080'
+    environment:
+      SERVER_PORT: '8080'
+      KAFKA_CLUSTERS_0_NAME: 'cluster01'
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 'localhost:9092'
     depends_on:
       - kafka
-      - zookeeper
-    ports:
-      - "8082:8082"
-    restart: always
-    environment:
-      - SERVER_PORT=8082
-      - KAFKA_CLUSTERS_0_NAME=cluster01
-      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:29092
-      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
     networks:
-      - kafka-net
+      - dev-net
+
+volumes:
+  kafka-data:
+
 networks:
-  kafka-net:
+  dev-net:
     driver: bridge

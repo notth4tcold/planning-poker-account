@@ -8,7 +8,7 @@ plugins {
 	kotlin("plugin.noarg") version "1.9.21"
 }
 
-group = "com.alexeiaj"
+group = "com.notth4tcold"
 version = "0.0.1-SNAPSHOT"
 
 java {
@@ -26,24 +26,18 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
-	implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka:4.1.0")
+    implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka:4.2.2")
+	implementation("org.springframework.kafka:spring-kafka")
 
-//	implementation("org.springframework.cloud:spring-cloud-starter")
-//	implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka:3.1.1")
-//	implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
-//	implementation("org.springframework.cloud:spring-cloud-starter-config")
-//	implementation("org.springframework.cloud:spring-cloud-stream")
-//	implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka")
-//	implementation("org.apache.kafka:kafka-streams")
-//	implementation("org.springframework.kafka:spring-kafka")
-//	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-//	implementation("io.micrometer:micrometer-tracing-bridge-brave")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("io.micrometer:micrometer-tracing-bridge-brave")
+	// implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 noArg {
-	annotation("com.alexeiaj.planningpokeraccount.core.common.annotation.NoArgsConstructor")
+	annotation("com.notth4tcold.planningpokeraccount.core.common.annotation.NoArgsConstructor")
 }
 
 tasks.getByName<Jar>("jar") {
