@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component
 class AccountCreatedStreamConsumer : Consumer<AccountCreatedEvent> {
 
     override fun accept(event: AccountCreatedEvent) {
-        println(event.toAccountCreated())
+        println("Conta criada com sucesso! Detalhes: ${event.toAccountCreated()}")
     }
 }
