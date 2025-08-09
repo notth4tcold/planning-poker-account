@@ -22,7 +22,7 @@ spring:
       bindings:
         account-created-stream-in-0:
           destination: 'account-created-stream'
-          group: 'planning-poker-account'
+          group: 'kotlin-app'
           content-type: 'application/json'
           consumer:
             concurrency: 1

@@ -44,7 +44,7 @@ dependencies {
 }
 
 noArg {
-	annotation("com.notth4tcold.planningpokeraccount.core.common.annotation.NoArgsConstructor")
+	annotation("com.notth4tcold.kotlin-app.core.common.annotation.NoArgsConstructor")
 }
 
 tasks.getByName<Jar>("jar") {

@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: planning-poker-account
+  name: kotlin-app
   namespace: default
   labels:
-    app: planning-poker-account
+    app: kotlin-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: planning-poker-account
+      app: kotlin-app
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -18,11 +18,11 @@ spec:
   template:
     metadata:
       labels:
-        app: planning-poker-account
+        app: kotlin-app
     spec:
       containers:
-        - name: planning-poker-account
-          image: notth4tcold/planning-poker-account:latest
+        - name: kotlin-app
+          image: notth4tcold/kotlin-app:latest
           imagePullPolicy: Always
           ports:
             - name: http
@@ -61,22 +61,22 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: planning-poker-account
+  name: kotlin-app
   namespace: default
 spec:
   selector:
-    app: planning-poker-account
+    app: kotlin-app
   ports:
     - port: 8080
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: planning-poker-account
+  name: kotlin-app
   namespace: default
 spec:
   defaultBackend:
     service:
-      name: planning-poker-account
+      name: kotlin-app
       port:
         number: 8080

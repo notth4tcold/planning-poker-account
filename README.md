@@ -1,4 +1,4 @@
-# Planning Poker Account
+# Kotlin App
 
 Application that manages accounts
 
@@ -23,8 +23,8 @@ Application that manages accounts
 - Create Kafka using: `kubectl apply -f ./deploy/kafka_deploy.yaml`
 - Use the JekinsFile to do the CI/CD in Jenkins to build and run the application ( remember to create the credentials ) OR use the steps below
 - Create the executable jar file using: `./gradlew clean build bootJar`
-- Build image using: `docker build -t DOCKER_USERNAME/planning-poker-account .`
-- Push image to docker hub using: `docker push DOCKER_USERNAME/planning-poker-account`
+- Build image using: `docker build -t DOCKER_USERNAME/kotlin-app .`
+- Push image to docker hub using: `docker push DOCKER_USERNAME/kotlin-app`
 - Run application using: `kubectl apply -f ./deploy/deploy.yaml`
 
   \*\* :gear: If needed use Port-Forward to create a connection to MongoDb and connect using MongoDBCompass: `kubectl port-forward mongodb-pod-name 27017:27017` or Kafka-UI `q`

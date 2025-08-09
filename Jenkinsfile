@@ -16,7 +16,7 @@ pipeline {
         stage ('Generate Image') {
             steps {
                 script {
-                    dockerapp = docker.build("notth4tcold/planning-poker-account", '-f ./Dockerfile ./')
+                    dockerapp = docker.build("notth4tcold/kotlin-app", '-f ./Dockerfile ./')
                 }
             }
         }

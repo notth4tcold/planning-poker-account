@@ -1,1 +1,1 @@
-rootProject.name = "planning-poker-account"
+rootProject.name = "kotlin-app"
