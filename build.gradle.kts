@@ -19,6 +19,12 @@ repositories {
 	mavenCentral()
 }
 
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:2023.0.3")
+    }
+}
+
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -26,8 +32,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
-    implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka:4.2.2")
-	implementation("org.springframework.kafka:spring-kafka")
+    implementation("org.springframework.boot:spring-boot-starter-integration")
+    implementation("org.springframework.cloud:spring-cloud-starter-stream-kafka")
+    implementation("org.springframework.kafka:spring-kafka")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.micrometer:micrometer-tracing-bridge-brave")

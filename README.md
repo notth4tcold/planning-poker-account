@@ -32,8 +32,8 @@ Application that manages accounts
 ### How to start Application to test locally: :hammer:
 
 - Use `docker-compose up -d` to start MongoDB
-- Run application using any IDE (remember to set ENV variables `MONGO_DB_HOST=mongodb;MONGO_DB_USER=mongouser;MONGO_DB_PASSWORD=mongopassword;KAFKA_BROKERS=localhost:9092`)
-- Or run using: `MONGO_DB_HOST=localhost MONGO_DB_USER=mongouser MONGO_DB_PASSWORD=mongopassword KAFKA_BROKERS=localhost:9092 ./gradlew bootRun`
+- Run application using any IDE (remember to set ENV variables `MONGO_DB_HOST=mongodb;MONGO_DB_USER=mongouser;MONGO_DB_PASSWORD=mongopassword;KAFKA_BROKERS=localhost:9093`)
+- Or run using: `MONGO_DB_HOST=localhost MONGO_DB_USER=mongouser MONGO_DB_PASSWORD=mongopassword KAFKA_BROKERS=localhost:9093 ./gradlew bootRun`
 
 ### Observations: :pushpin:
 
